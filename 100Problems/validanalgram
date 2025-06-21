@@ -1,0 +1,41 @@
+using System;
+
+namespace validanagram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string first = "asdft";
+            string second ="dstbf";
+
+            bool isValid = CheckValidAnagram(first,second);
+
+
+
+            Console.WriteLine("Hello World! " + isValid);
+        }
+
+        static bool CheckValidAnagram(string first, string second){
+            if(first.Length != second.Length)
+            {
+                return false;
+            }
+            int[] counts = new int[26];
+
+            for(int i =0; i< first.Length; i++)
+            {
+                counts[first.ToCharArray()[i] - 'a']++;
+                counts[second.ToCharArray()[i] - 'a']--; 
+            }
+            foreach(int i in counts){
+                if(i>0){
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+    }
+}
+

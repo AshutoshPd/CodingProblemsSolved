@@ -1,0 +1,67 @@
+using System;
+
+namespace reversebinaryTree
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            TreeNode root = new TreeNode(1);
+            root.left = new TreeNode(2);
+            root.right = new TreeNode (3);
+            root.left.left = new TreeNode(4);
+            root.left.right = new TreeNode(5);
+            root.right.left = new TreeNode(6);
+            root.right.right = new TreeNode(7);
+            
+            PrintBTree(root);
+
+            ReverseBTree(root);
+
+            PrintBTree(root);
+
+            Console.WriteLine("Hello World!");
+        }
+
+        static void PrintBTree(TreeNode root)
+        {
+            if(root == null)
+            {return;}
+            PrintBTree(root.left);
+            System.Console.Write(root.val + " ");
+            PrintBTree(root.right);
+        }
+
+        static void ReverseBTree(TreeNode root)
+        {
+            if(root==null)
+            {
+                return;
+            }
+            
+            TreeNode left = root.left;
+            
+            TreeNode right = root.right;
+            root.left= right;
+            root.right = left;
+            ReverseBTree(root.left);
+            ReverseBTree(root.right);
+        }
+    }
+
+    public class TreeNode
+    {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int v, TreeNode l = null, TreeNode r = null)
+
+        {
+            val=v;
+            left=l;
+            right  =r;
+
+        }
+    }
+}
+

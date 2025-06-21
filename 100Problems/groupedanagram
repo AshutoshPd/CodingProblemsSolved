@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+namespace groupedanalagram
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] input = {"eat","tea","tan","ate","nat","bat"};
+            var output = GetGroupedAnagram(input);
+            foreach(var item in output)
+            {
+                foreach(string str in item)
+                {
+                    System.Console.Write(str + " ");
+                }
+                System.Console.WriteLine();
+            }
+
+            Console.WriteLine("Hello World!");
+        }
+        
+        static List<List<string>> GetGroupedAnagram(string[] input)
+        {
+            List<List<string>> output = new List<List<string>>();
+            Dictionary<string, List<string>> groupedAnagrams = new Dictionary<string, List<string>>();
+
+            foreach(string current in input)
+            {
+                char[] characters = current.ToCharArray();
+                Array.Sort(characters);
+                string sorted = new string(characters);
+                if(!groupedAnagrams.ContainsKey(sorted)){
+                    groupedAnagrams.Add(sorted, new List<string>());
+                }
+                groupedAnagrams[sorted].Add(current);
+
+            }
+            output.AddRange(groupedAnagrams.Values);
+            
+            
+            return output;
+
+        }
+
+    }
+}
+

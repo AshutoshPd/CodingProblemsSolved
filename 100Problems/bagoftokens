@@ -1,0 +1,27 @@
+public class Solution {
+    public int BagOfTokensScore(int[] tokens, int P) {
+        int score = 0;
+        
+        Array.Sort(tokens);
+        int s= 0;
+        int e = tokens.Length-1;
+        for(int i =0; i<=e; i++)
+        {
+            if(P >= tokens[i] ){
+                score++;
+                P = P-tokens[i];
+            }
+            else
+            {
+                if(score> 0 && (e>  i+1) ){
+                    P= P + tokens[e];
+                    score--;
+                    e--;
+                    i--;
+                }
+            }
+        }
+        return score;    
+        
+    }
+}

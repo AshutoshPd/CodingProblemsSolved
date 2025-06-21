@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+namespace partitionlabels
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = "ababcbacadefegdehijhklij";
+            List<int> output = FindPartition(input);
+            for(int i =0; i< output.Count; i++)
+            {
+                System.Console.Write(output[i] + "");
+            }
+            Console.WriteLine("Hello World!");
+        }
+
+        static List<int> FindPartition(string input)
+        {
+            List<int> output =  new List<int>();
+            int[] lastindex = new int[26];
+            char[] characters = input.ToCharArray();
+            for(int c=0; c<input.Length; c++)
+            {
+                lastindex[characters[c] - 'a'] = c;
+            }
+            int i =0;
+
+            while(i< input.Length)
+            {
+                int end = lastindex[characters[i] - 'a'];
+                int j = i+1;
+                while(j != end)
+                {
+                    end = Math.Max(lastindex[characters[j++] -'a'] , end);
+                }
+               
+                output.Add(j-i+1); i = j + 1;
+            }
+
+            return output;
+        }
+    }
+}
+

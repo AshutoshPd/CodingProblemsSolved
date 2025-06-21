@@ -1,0 +1,21 @@
+static int hourglassSum(int[][] arr) {
+        
+        int c = 0;
+        
+        
+        int max = int.MinValue;
+        int sum = 0;         
+        for(int r = 0; r< arr.Length-2; r++){
+            while(c<arr[0].Count()-2){
+            sum =   arr[r][c] + arr[r][c+1] + arr[r] [c+2] 
+                + arr[r+1][c+1] 
+                + arr[r+2][c] + arr[r+2][c+1] + arr[r+2][c+2];
+            if(sum > max) {max = sum;}
+            c++;
+            }
+            c=0;
+            
+        }
+        return max;
+
+    }

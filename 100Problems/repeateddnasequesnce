@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+
+namespace repeatedDNA
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input = "AAAAAAAAAAA";
+            var output = GetRepeatedDNASequence(input);
+            foreach(string s in output)
+            {
+            Console.WriteLine("Hello World!" + s);
+            }
+        }
+
+        static List<string> GetRepeatedDNASequence(string s)
+        {
+            List<string> output = new List<string>();
+            Dictionary<string, int> sequences = new Dictionary<string, int> ();
+            for(int i =0; i<= s.Length-10; i++)
+            {
+                if(sequences.TryGetValue(s.Substring(i,10), out int value)){
+                    sequences[s.Substring(i,10)] = value+1;
+                    if(value==1){
+                    output.Add(s.Substring(i,10));}
+                }
+                else{
+                    sequences[s.Substring(i,10)] = 1;
+                }
+            }
+            return output;
+        }
+
+    }
+}
+

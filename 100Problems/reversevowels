@@ -1,0 +1,38 @@
+public class Solution {
+    public string ReverseVowels(string s) {
+        HashSet<char> vowels = new HashSet<char>();
+            vowels.Add('a');
+            vowels.Add('e');
+            vowels.Add('i');
+            vowels.Add('o');
+            vowels.Add('u');
+            vowels.Add('A');
+            vowels.Add('E');
+            vowels.Add('I');
+            vowels.Add('O');
+            vowels.Add('U');
+            
+            //string input = "leetcode";
+            int f = 0;
+            int l = s.Length-1;
+
+            //System.Console.WriteLine(input.ToCharArray()[l]);
+            char[] strA = s.ToCharArray();
+            while(f<l)
+            {
+                while(f<l && !vowels.Contains(strA[f]) ){
+                    f++;
+                }
+                while(f<l && !vowels.Contains(strA[l]))
+                {
+                    l--;
+                }
+                char temp = strA[f];
+                strA[f++] = strA[l];
+                strA[l--] = temp;
+
+
+            }
+        return new string (strA);
+    }
+}

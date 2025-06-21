@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+
+namespace happyNumber
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n =91;
+            bool isHappy=  CheckHappyNumber(n);
+
+            Console.WriteLine(isHappy);
+        }
+
+        static bool CheckHappyNumber(int n)
+        {
+            if(n==0)
+            {
+                return false;
+            }
+            HashSet<int> seen = new HashSet<int> ();
+            while(n!= 1)
+            {
+                int sum=0;
+                int current =n;
+                while (current !=0)
+                {
+                        sum = sum + (current %10)* (current%10);
+                        current/=10;
+                }
+                if(seen.TryGetValue(sum, out int val ))
+                {
+                    return false;
+                }
+                seen.Add(sum);
+                n=sum;
+
+            }
+
+            return true;
+        }
+    }
+}
+

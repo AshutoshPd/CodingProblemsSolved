@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+
+namespace rottingoranges
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int [,] input = new int [,] {{2,1,1},{1,1,0},{0,1,1}};
+            int minutes =  FindMinutes(input);
+
+            Console.WriteLine("Hello World!" + minutes);
+        }
+        
+        static int FindMinutes(int[,] input)
+        {
+            int minutes = 0;
+            HashSet<string> fresh = new HashSet<string> ();
+            HashSet<string> rotton = new HashSet<string> ();
+            int length = input.Length;
+            int r= input.GetUpperBound(0);
+            int c = input.GetUpperBound(1);
+            for(int i=0; i<=r; i++)
+            {
+                for(int j =0; j<=c; j++)
+                {
+                    if(input[i,j] == 1){
+                        fresh.Add(string.Concat(i,j));
+
+                    }
+                    else if(input[i,j] == 2){
+                        rotton.Add(string.Concat(i,j));
+                    }
+
+                }
+            }
+
+            while(fresh.Count>0)
+            {
+                HashSet<string> infected = new HashSet<string> ();
+                foreach(string rot in rotton)
+                {
+
+                   int i = Convert.ToInt16(rot.Substring(0,1));  
+                   int j = Convert.ToInt16(rot.Substring(1,1));  
+                   string[] adj = {string.Concat(i+1,j),string.Concat(i,j+1), string.Concat(i-1,j), string.Concat(i,j-1)};  
+                   foreach(string s in adj)
+                   {
+                       if(fresh.Contains(s)){
+                            infected.Add(string.Concat(s));
+                            fresh.Remove(s);
+                       }
+                   }
+                   if(infected.Count == 0)
+                   {return -1;}  
+                }
+                rotton = infected;
+                minutes++;
+            }
+
+            return minutes;
+        }
+    }
+}
+

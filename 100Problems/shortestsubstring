@@ -1,0 +1,50 @@
+using System;
+using System.Text;
+
+namespace findsubstrings
+{
+    // Shortest way to form substrings
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string source = "abc";
+            string target = "abcbc";
+            int res = shortestway(source,target);
+
+            Console.WriteLine("Hello World! " + res) ;
+        }
+
+        static int shortestway(string source, string target)
+        {
+            int subsNum = 0;
+            
+            string remaining = target;
+            while(remaining.Length>0)
+            {
+                StringBuilder subSequences = new StringBuilder ();
+
+                int s=0;
+                int t=0;
+                while(s<source.Length && t<remaining.Length)
+                {
+                    if(source.ToCharArray()[s++] == remaining.ToCharArray()[t])
+                    {
+                                subSequences.Append(remaining.ToCharArray()[t++]);
+                    } 
+                }
+                if(subSequences.Length==0)
+                {
+                    return -1;
+                }
+                subsNum++;
+                remaining= remaining.Substring(subSequences.Length);
+            }    
+
+
+
+            return subsNum;
+        }
+    }
+}
+

@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+namespace spiralmatrix
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] input = new int[,]{{0,1,2},{3,4,5},{6,7,8}};
+
+            var output = PrintSpiralMatrix(input);
+            foreach(int i in output){
+                System.Console.WriteLine(i);
+            }    
+            //Console.WriteLine("Hello World!");
+        }
+
+        static List<int> PrintSpiralMatrix(int[,] input){
+            List<int> nums = new List<int> ();
+            if(input == null || input.Length==0)
+            {
+                return nums;
+            }
+            
+            int left = 0;
+            int right = input.GetUpperBound(1);
+            int top = 0;
+            int down = input.GetUpperBound(0);
+            int size = input.Length;
+            while(nums.Count < input.Length)
+            {
+                for(int i=left; i<= right; i++)
+                {
+                    nums.Add(input[top, i]);
+                }
+                top++;
+                for(int i = top; i<=down; i++)
+                {
+                    nums.Add(input[i,right]);
+                }
+                right--;
+                for(int i=right; i>= left; i-- )
+                {
+                    nums.Add(input[down,i]);
+                }
+                down--;
+                for(int i= down; i >= top; i--)
+                {
+                    nums.Add(input[i, left]);
+                }
+                left++;
+            }
+            return nums;
+
+
+            
+
+        
+        }
+    }
+}
+
